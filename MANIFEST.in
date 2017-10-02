@@ -1,0 +1,3 @@
+graft 2dqg/templates
+graft 2dqg/static
+include 2dqg/schema.sql

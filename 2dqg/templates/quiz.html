@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+		<form method="POST" action="/answer" id="form">
+		{% for question in questions %}
+		<p>{{question}}<p>
+		<input type="radio" name="opinion[]" value="stronglyAgree"> Strongly Agree <br>
+		<input type="radio" name="opinion[]" value="agree"> Agree <br>
+		<input type="radio" name="opinion[]" value="neutral"> Neutral <br>
+		<input type="radio" name="opinion[]" value="disagree"> Disagree <br>
+		<input type="radio" name="opinion[]" value="stronglyDisagree"> Strongly Disagree <br>
+		{%endfor%}
+		<button type="submit"></button>
+		</form>
+{%endblock%}
