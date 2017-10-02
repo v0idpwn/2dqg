@@ -79,12 +79,23 @@ def make():
 		return str(questions+opt)
 
 @app.route('/quiz/<quizId>')
-def show_user_profile(quizId):
+def showQuiz(quizId):
 	db = get_db()
-	p = db.execute('select name from questionary where id=?', [quizId])
-	p = p.fetchall()
-	data = db.execute('select qText from question where fk_id=?', [str(p)])
-	data = data.fetchall() 
-	return render_template('quiz.html', questions=data)
+	data = db.execute('select qText from question where fk_id=?', [str(quizId)])
+	data = data.fetchall()
+	quizName = db.execute('select name from questionary where id=?', [str(quizId)])
+	quizName = quizName.fetchone()
+	return render_template('quiz.html', questions=data, name=quizName, quizid=str(quizId))
 
 		
+@app.route('/quiz/<quizId>/answer', methods=['POST', 'GET'])
+def answerQuiz(quizId):
+	db = get_db()
+	qNumber = db.execute('select count(qId) from question where fk_id=?', [str(quizId)])
+	qNumber = qNumber.fetchone()
+	data = request.form.getlist('opinion[]')
+	return str(data)
+	for a in range (0, qNumber):
+		xAxis = xAxis + db.execute('select ' + data[a] + 'X from question where fk id = ? limit 1 offset ' + str(a), [str(quizId)])
+		yAxis = yAxis + db.execute('select ' + data[a] + 'Y from question where fk_id = ? limit 1 offset ' + str(a), [str(quizId)]) 
+	return(str(xAxis)+" e " +str(yAxis))
