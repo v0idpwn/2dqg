@@ -90,12 +90,19 @@ def showQuiz(quizId):
 		
 @app.route('/quiz/<quizId>/answer', methods=['POST', 'GET'])
 def answerQuiz(quizId):
-	db = get_db()
-	qNumber = db.execute('select count(qId) from question where fk_id=?', [str(quizId)])
-	qNumber = qNumber.fetchone()
-	data = request.form.getlist('opinion[]')
-	return str(data)
-	for a in range (0, qNumber):
-		xAxis = xAxis + db.execute('select ' + data[a] + 'X from question where fk id = ? limit 1 offset ' + str(a), [str(quizId)])
-		yAxis = yAxis + db.execute('select ' + data[a] + 'Y from question where fk_id = ? limit 1 offset ' + str(a), [str(quizId)]) 
-	return(str(xAxis)+" e " +str(yAxis))
+	if request.method == 'POST':
+		db = get_db()
+		qNumber = db.execute('select count(qId) from question where fk_id=?', [str(quizId)])
+		qNumber = qNumber.fetchone()
+		data = []
+		xAxis = yAxis = 0.0
+		for a in range(1, qNumber[0]+1): #starts at 1 because loop.index does
+			data.append(request.form.get('opinion['+str(a)+']'))
+		for a in range (0, qNumber[0]):
+			x = db.execute('select ' + str(data[a]) + 'X from question where fk_id = ? limit 1 offset ' + str(a), [str(quizId)])
+			y = db.execute('select ' + str(data[a]) + 'Y from question where fk_id = ? limit 1 offset ' + str(a), [str(quizId)])
+			x = x.fetchone()
+			y = y.fetchone()
+			xAxis = xAxis + x[0]
+			yAxis = yAxis + y[0]
+		return(str(xAxis)+" e " +str(yAxis))
