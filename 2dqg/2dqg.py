@@ -70,7 +70,7 @@ def make():
 		#sending to db
 		db = get_db()
 		cursor = db.cursor()
-		db.execute('insert into questionary (name, xAxis, yAxis) values (?, ?, ?)', [request.form['qName'], request.form['xAxis'], request.form['yAxis']])
+		cursor.execute('insert into `questionary` (name, xAxis, yAxis) values (?, ?, ?)', [request.form['qName'], request.form['xAxis'], request.form['yAxis']])
 		questionary_id = cursor.lastrowid
 		for a in range (0, len(questions)):
 			db.execute('insert into question (fk_id, qText, stronglyAgreeX, stronglyAgreeY, agreeX, agreeY, neutralX, neutralY, disagreeX, disagreeY, stronglyDisagreeX, stronglyDisagreeY) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [questionary_id, questions[a], opt[0][a], opt[1][a], opt[2][a], opt[3][a], opt[4][a], opt[5][a], opt[6][a], opt[7][a], opt[8][a], opt[9][a]])
