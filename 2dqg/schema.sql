@@ -4,7 +4,9 @@ create table questionary (
 	id integer primary key autoincrement,
 	name text not null,
 	xAxis text not null,
-	yAxis text not null
+	yAxis text not null,
+	maxX float not null,
+	maxY float not null
 );
 
 create table question (

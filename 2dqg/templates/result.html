@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+		<h2 class="qTitle">{{name}} - Results</h2>
+		<h3> X axis = {{ xAxis }}: {{ x }}/{{ maxX }}</h3>
+		<h3> Y axis = {{ yAxis }}: {{ y }}/{{ maxY }}</h4>
+		<canvas id="chart">
+			Apparently, your browser doesnt support HTML5. I'm sorry.
+		</canvas>
+		<script type="text/javascript">
+			var img = new Image();
+			img.src = "/static/chart.png" 
+			var cCanvas = document.getElementById("chart");
+			var ctx = cCanvas.getContext("2d");
+			ctx.drawImage(img,0,0);
+			// desenhando ponto
+			ctx.fillStyle = "black";
+			ctx.beginPath();
+			let x = ({{ x }}/{{ maxX }}*150) + 150
+			let y = -({{ y }}/{{ maxY }}*150) + 150
+			ctx.arc(x, y, 5, 0, 2*Math.PI);
+			ctx.fill();
+		</script>
+{% endblock %}
