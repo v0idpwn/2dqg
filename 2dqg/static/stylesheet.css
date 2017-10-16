@@ -4,4 +4,4 @@ h1, h2          { font-family: 'Georgia', serif; margin: 0;}
 header          { border-bottom: 2px solid #424242;}
 h2              { font-size: 1.2em; margin-bottom: 4px;}
 .qTitle			{ margin-top: 20px;}
-canvas			{ border: 1px dotted black;}
+canvas			{ border: 1px solid black;}
