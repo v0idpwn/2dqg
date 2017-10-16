@@ -6,7 +6,7 @@
 
 import os
 import sqlite3
-from flask import Flask, current_app, request, render_template, g
+from flask import Flask, current_app, request, render_template, g, redirect
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -71,12 +71,11 @@ def make():
 		db = get_db()
 		cursor = db.cursor()
 		cursor.execute('insert into `questionary` (name, xAxis, yAxis, maxX, maxY) values (?, ?, ?, ?, ?)', [request.form['qName'], request.form['xAxis'], request.form['yAxis'], request.form['maxX'], request.form['maxY']])
-		questionary_id = cursor.lastrowid
+		questionaryId = cursor.lastrowid
 		for a in range (0, len(questions)):
-			db.execute('insert into question (fk_id, qText, stronglyAgreeX, stronglyAgreeY, agreeX, agreeY, neutralX, neutralY, disagreeX, disagreeY, stronglyDisagreeX, stronglyDisagreeY) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [questionary_id, questions[a], opt[0][a], opt[1][a], opt[2][a], opt[3][a], opt[4][a], opt[5][a], opt[6][a], opt[7][a], opt[8][a], opt[9][a]])
+			db.execute('insert into question (fk_id, qText, stronglyAgreeX, stronglyAgreeY, agreeX, agreeY, neutralX, neutralY, disagreeX, disagreeY, stronglyDisagreeX, stronglyDisagreeY) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [questionaryId, questions[a], opt[0][a], opt[1][a], opt[2][a], opt[3][a], opt[4][a], opt[5][a], opt[6][a], opt[7][a], opt[8][a], opt[9][a]])
 		db.commit()
-		
-		return str(questions+opt)
+		return redirect('/quiz/'+str(questionaryId))
 
 @app.route('/quiz/<quizId>')
 def showQuiz(quizId):
@@ -96,6 +95,10 @@ def answerQuiz(quizId):
 		qNumber = qNumber.fetchone()
 		qName = db.execute('select name from questionary where id=?', [str(quizId)])
 		qName = qName.fetchone()
+		xName = db.execute('select xAxis from questionary where id=?', [str(quizId)])
+		xName = xName.fetchone()
+		yName = db.execute('select yAxis from questionary where id=?', [str(quizId)])
+		yName = yName.fetchone()
 		maxX = db.execute('select maxX from questionary where id=?', [str(quizId)])
 		maxY = db.execute('select maxY from questionary where id=?', [str(quizId)])
 		maxX = maxX.fetchone()
@@ -111,4 +114,4 @@ def answerQuiz(quizId):
 			y = y.fetchone()
 			xAxis = xAxis + x[0]
 			yAxis = yAxis + y[0]
-		return(render_template('result.html', x=xAxis, y=yAxis, name=qName[0], maxX=maxX[0], maxY=maxY[0]))
+		return(render_template('result.html', x=xAxis, y=yAxis, name=qName[0], maxX=maxX[0], maxY=maxY[0], xAxis=xName[0], yAxis=yName[0]))
