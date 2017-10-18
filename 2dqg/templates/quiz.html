@@ -1,17 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="container">
 		<form method="POST" action="/quiz/{{quizid}}/answer" id="form">
-		<h2 class="qTitle">{{name[0]}}</h2>
-		<p>Evaluate those propositions according to your opinion</p>
+<div class="row">
+<div class="col-xs-12">
+		<h2 class="qTitle">{{name[0]}}</h2><hr/>
+</div>
+</div>
+		<p>Evaluate those propositions according to your opinion</p></hr>
 		{% for question in questions %}
 		<h4>{{question[0]}}</h4>
 		<input type="radio" name="opinion[{{loop.index}}]" value="stronglyAgree"> Strongly Agree <br>
 		<input type="radio" name="opinion[{{loop.index}}]" value="agree"> Agree <br>
 		<input type="radio" name="opinion[{{loop.index}}]" value="neutral"> Neutral <br>
 		<input type="radio" name="opinion[{{loop.index}}]" value="disagree"> Disagree <br>
-		<input type="radio" name="opinion[{{loop.index}}]" value="stronglyDisagree"> Strongly Disagree <br>
+		<input type="radio" name="opinion[{{loop.index}}]" value="stronglyDisagree"> Strongly Disagree <br><hr/>
 		{%endfor%}
 		<br>
-		<input type="submit" value="Submit"/>
+		<input type="submit" value="Submit" class="btn"/>
 		</form>
+</div>
+<br/>
 {%endblock%}
