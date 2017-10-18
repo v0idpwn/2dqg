@@ -1,63 +1,114 @@
-{% extends "layout.html" %}
-{% block content %}
-		<form method="POST" action="/make" id="form">
-		<h2 class="qTitle">Basic data:</h2>
-		<table>
-		<tr>
-			<th>Questionary name:</th> 
-			<th><input type="text" name="qName" size="50"></th>
-		</tr>
-		<tr>
-			<th>X axis:</th>
-			<th><input type="text" name="xAxis" size="50"></th>
-			<th> Max X:<input type="number" name="maxX" size="50"></th>
-		</tr>
-		<tr>
-			<th>Y axis:</th>
-			<th><input type="text" name="yAxis" size="50"></th>
-			<th> Max Y:<input type="number" name="maxY" size="50"</th>
-		</tr>
-		</table>
-		<div id="container">
-		<h2 class="qTitle">Question 1:</h2>
-		<div id="Question">
-			<label>Question: </label> <input type="text" name="question[]" size = "100">
-			<table>
-				<tr>
-					<th>Answer</th>
-					<th>X</th>
-					<th>Y</th>
-				</tr>
-				<tr>
-					<th>Strongly agree:</th>
-					<th><input type="number" maxlength="4" size="4" name="stronglyAgreeX[]"></th> 
-					<th><input type="number" maxlength="4" size="4" name="stronglyAgreeY[]"></th>
-				</tr>
-				<tr>
-					<th>Agree:</th>
-					<th><input type="number" maxlength="4" size="4" name="agreeX[]"></th> 
-					<th><input type="number" maxlength="4" size="4" name="agreeY[]"></th>
-				</tr>
-				<tr>
-					<th>Neutral:</th>
-					<th><input type="number" maxlength="4" size="4" name="neutralX[]"></th> 
-					<th><input type="number" maxlength="4" size="4" name="neutralY[]"></th>
-				</tr>
-				<tr>
-					<th>Disagree:</th>
-					<th><input type="number" maxlength="4" size="4" name="disagreeX[]"></th> 
-					<th><input type="number" maxlength="4" size="4" name="disagreeY[]"></th>
-				</tr>
-				<tr>
-					<th>Strongly disagree:</th>
-					<th><input type="number" maxlength="4" size="4" name="stronglyDisagreeX[]"></th> 
-					<th><input type="number" maxlength="4" size="4" name="stronglyDisagreeY[]"></th>
-				</tr>
-			</table>
-		</div>
-		</div>
-		<input type="button" value="Add another question" onClick="addInput('Question');">
-		<input type="submit" value="Submit">
-		</form>
-		<script type="text/javascript" src="/static/scripts.js"></script>
+{% extends "layout.html" %} {% block content %}
+
+
+<div class="align">
+    <form method="POST" action="/make" id="form" class="form-inline">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="qTitle">Basic data:</h2>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="qname"  >Questionary name:</label><br/>
+                                <input type="text" name="qName" size="100%" class="form-control">
+                                <hr/>
+                            </div>
+                        </div>
+                        <div class="row axis">
+                            <div class="col-xs-12 col-md-4">
+                                <label for="xaxis">X Axis:</label>
+                                <input type="text" name="xAxis" class="form-control">
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <label for="maxx">Max X:</label>
+                                <input type="number" name="maxX" class="form-control">
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row axis">
+                            <div class="col-xs-12 col-md-4">
+                                <label for="yaxis">Y Axis:</label>
+                                <input type="text" name="yAxis" class="form-control">
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <label for="maxy">Max Y:</label>
+                                <input type="number" name="maxY" class="form-control">
+                            </div>
+                        </div>
+                        <hr/>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="container" class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2 class="qTitle">Question 1:</h2>
+                </div>
+            </div>
+<div id="Question">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <label for="qst">Question:</label><br/>
+                    <input type="text" name="question[]" class="form-control" size="100%">
+                    
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                    <table class="table">
+                        <tr>
+                            <th>Answer</th>
+                            <th><center>X</center></th>
+                            <th><center>Y</center></th>
+                        </tr>
+                        <tr>
+                            <th>Strongly agree:</th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="stronglyAgreeX[]"></center></th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="stronglyAgreeY[]"></center></th>
+                        </tr>
+                        <tr>
+                            <th>Agree:</th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="agreeX[]"></center></th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="agreeY[]"></center></th>
+                        </tr>
+                        <tr>
+                            <th>Neutral:</th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="neutralX[]"></center></th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="neutralY[]"></center></th>
+                        </tr>
+                        <tr>
+                            <th>Disagree:</th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="disagreeX[]"></center></th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="disagreeY[]"></center></th>
+                        </tr>
+                        <tr>
+                            <th>Strongly disagree:</th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="stronglyDisagreeX[]"></center></th>
+                            <th><center><input type="number" maxlength="4" class="form-control" name="stronglyDisagreeY[]"></center></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+</div>
+        </div>
+		
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="button" value="Add another question" onClick="addInput('Question');" class="btn">
+                    <input type="submit" value="Submit" class="btn  creation-form">
+                </div>
+            </div>
+        </div>
+    </form>
+<br/>
+
+
+
+    <script type="text/javascript" src="/static/scripts.js"></script>
 {% endblock %}

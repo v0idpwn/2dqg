@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-		<h2 class="qTitle">{{name}} - Results</h2>
+<div class="container">
+		<h2 class="qTitle">{{name}} - Results</h2><hr/>
 		<h3> X axis = {{ xAxis }}: {{ x }}/{{ maxX }}</h3>
 		<h3> Y axis = {{ yAxis }}: {{ y }}/{{ maxY }}</h4>
 		<canvas id="chart" width="300px" height="299px">
@@ -20,4 +21,5 @@
 			ctx.arc(x, y, 4, 0, 2*Math.PI);
 			ctx.fill();
 		</script>
+</div>
 {% endblock %}

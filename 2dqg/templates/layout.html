@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>2dqg</title>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheet.css') }}">
+    <title>2dqg</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheet.css') }}">
+    <meta name="viewport" content="width=device-width, inicial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+
 </head>
+
 <body>
-	<header>
-		<h1>2dqg - the 2d quiz generator</h1>
-	</header>
-	<content>
-		{% block content %}
-		{% endblock %}
-	</content>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>2dqg - the 2d quiz generator</h1>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <content>
+
+        {% block content %} {% endblock %}
+
+    </content>
 </body>
+
 </html>
