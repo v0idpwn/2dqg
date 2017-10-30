@@ -1,5 +1,6 @@
 PRAGMA foreign_keys = ON;
 drop table if exists questionary;
+drop table if exists question;
 create table questionary (
 	id integer primary key autoincrement,
 	name text not null,
